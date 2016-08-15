@@ -1,0 +1,125 @@
+<section ng-controller="BusquedaCtrl">
+<div class="row">
+	<div class="col-sm-3 col-xs-12">
+		<rd-widget>
+			<rd-widget-body ng-show="api.weAreWaiting">
+				<div class="widget-icon red pull-left">
+					<i class="fa fa-file-text fa-spin"></i>
+				</div>
+				<div class="title">
+					<span>...</span>
+				</div>
+				<div class="comment">Buscando
+			</div></rd-widget-body>
+			<rd-widget-body ng-show="!api.weAreWaiting">
+				<div class="widget-icon red pull-left">
+					<i class="fa fa-file-text"></i>
+				</div>
+				<div class="title">
+					<span>{{pagination.totalObjects || 0}}</span>
+				</div>
+				<div class="comment">Acuerdos
+			</div></rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-sm-4 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<form ng-submit="pageChanged()" class="container-fluid">
+					<div class="row">
+						<div class="form-group col-xs-12">
+						  <ui-select class="input-lg" ng-model="instancia.selected" theme="bootstrap">
+						    <ui-select-match placeholder="Seleccionar instancia...">
+							<span class="shown-xs">{{$select.selected.clave}}</span>
+							<span class="hidden-xs">{{$select.selected.nombre}}</span>
+						    </ui-select-match>
+						    <ui-select-choices group-by="'materia'" repeat="item in instancias | orderBy: 'clave' | filter: $select.search | limitTo: 20">
+						      <div ng-bind-html="item.clave | highlight: $select.search"></div>
+						      <small ng-bind-html="item.nombre | highlight: $select.search"></small>
+						    </ui-select-choices>
+						  </ui-select>
+						</div>
+					</div>
+				</form>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-sm-5 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="container-fluid">
+					<form ng-submit="pageChanged()" class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12 col-sm-9">
+								<input type="text" ng-model="expediente.input" ui-mask="9999 / 9?9?9?9?9?9?9" placeholder="AÑO/consecutivo" ui-mask-placeholder ui-mask-placeholder-char="_" class="form-control input-lg">
+							</div>
+
+							<div class="col-xs-12 col-sm-3">
+								<button type="submit" ng-click="pageChanged()" class="hidden-xs btn btn-success btn-circle btn-lg">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+								<button type="submit" ng-click="pageChanged()" class="shown-xs btn btn-success btn-block btn-lg">
+									<i class="glyphicon glyphicon-search"></i> Buscar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <rd-widget>
+      <daf-widget-header icon="fa-th-list" title="Resultados" wclass="pull-right col-xs-6 col-sm-2">
+				<button ng-show="isFavourite()" type="button" class="pull-right btn btn-default btn-secondary" tooltip title="Expediente guardado">
+					<i class="pull-right fa fa-star text-mutted"></i>
+				</button>
+
+				<button ng-show="!isFavourite()" type="button" class="pull-right btn btn-default btn-secondary" tooltip title="Guardar en Mis expedientes">
+					<i class="fa fa-star text-mutted"></i> Guardar
+				</button>
+
+      </daf-widget-header>
+      <rd-widget-body classes="medium no-padding">
+        <div class="table-responsive">
+          <table class="table table-striped">
+			  <thead>
+			  <tr>
+				  <td>claveInstancia</td>
+				  <td>AÑO<b>/</b>consecutivo</td>
+				  <td>fecha</td>
+				  <td>secretaria</td>
+				  <td>actor</td>
+				  <td>demandado</td>
+				  <td>autorizado</td>
+				  <td>tipoDeJuicio</td>
+				  <td>concepto</td>
+			  </tr>
+			  </thead>
+            <tbody>
+		<tr dir-paginate="acuerdo in acuerdos | filter:filter | itemsPerPage: pagination.objectsPerPage" total-items="pagination.totalObjects" current-page="pagination.current">
+			<td>{{acuerdo.claveInstancia}}</td>
+			<td>{{acuerdo['año']}}<b>/</b>{{acuerdo.consecutivo}}</td>
+			<td>{{acuerdo.fecha | date : 'yyyy/MM/dd' }}</td>
+			<td>{{acuerdo.secretaria}}</td>
+			<td>{{acuerdo.actor}}</td>
+			<td>{{acuerdo.demandado}}</td>
+			<td>{{acuerdo.autorizado}}</td>
+			<td>{{acuerdo.tipoDeJuicio}}</td>
+			<td>{{acuerdo.concepto}}</td>
+		</tr>
+            </tbody>
+          </table>
+        </div>
+      </rd-widget-body>
+      <rd-widget-footer>
+	<dir-pagination-controls class="pagination pagination-sm pull-right" on-page-change="pageChanged()"></dir-pagination-controls>
+        <div class="clearfix"></div>
+      </rd-widget-footer>
+    </rd-widget>
+  </div>
+</div>
+</section>

@@ -1,0 +1,17 @@
+<section id="login-body" ng-controller="LoginCtrl">
+	<div class="wrapper">
+		<form class="login" ng-class="{'loading': loginForm.isLoading, 'ok': loginForm.isOk}" ng-submit="loginFormSubmit()">
+			<p class="title">Entrar</p>
+			<input type="text" ng-model="user.username" placeholder="Correo electrónico" autofocus>
+			<i class="fa fa-user"></i>
+			<input type="password" ng-model="user.password" placeholder="Contraseña">
+			<i class="fa fa-key"></i>
+			<a href="#">¿Olvidaste tu contraseña?</a>
+			<button type="submit">
+				<i class="spinner"></i>
+				<span class="state">{{loginForm.message}}</span>
+			</button>
+		</form>
+		<footer><a target="blank" href="https://damianfernandez.mx/">damianfernandez.mx</a></footer>
+	</div>
+</section>
