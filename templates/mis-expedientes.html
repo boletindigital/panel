@@ -1,0 +1,48 @@
+<section ng-controller="MisExpedientesCtrl">
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <rd-widget>
+                <rd-widget-body>
+                    <div class="widget-icon red pull-left">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                    <div class="title">{{number(misExpedientes.length)}}</div>
+                    <div class="comment">Expedientes</div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <rd-widget>
+                <rd-widget-header icon="fa-calendar" title="Mis expedientes">
+                    <input type="text" ng-model="misExpedientesFilter.$" placeholder="Filtrar" class="form-control input-sm">
+                </rd-widget-header>
+                <rd-widget-body classes="medium no-padding">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>Instancia</td>
+                                <td>Año/consecutivo</td>
+                                <td>Enviar notificaciones</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="e in misExpedientes | filter:misExpedientesFilter">
+                                <td>{{e.expediente.instancia}}</td>
+                                <td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
+                                <td>
+                                    <pretty-checkbox ng-model="e.expediente.notificar" label="'Enviar por e-mail'"></pretty-checkbox>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </rd-widget-body>
+            </rd-widget>
+        </div>
+    </div>
+</section>
