@@ -100,7 +100,7 @@
 			  </tr>
 			  </thead>
             <tbody>
-		<tr dir-paginate="acuerdo in acuerdos | filter:filter | itemsPerPage: pagination.objectsPerPage" total-items="pagination.totalObjects" current-page="pagination.current">
+		<tr dir-paginate="acuerdo in acuerdos | filter:filter | orderBy: '-fecha' | itemsPerPage: pagination.objectsPerPage" total-items="pagination.totalObjects" current-page="pagination.current">
 			<td>{{acuerdo.claveInstancia}}</td>
 			<td>{{acuerdo['año']}}<b>/</b>{{acuerdo.consecutivo}}</td>
 			<td>{{acuerdo.fecha | date : 'yyyy/MM/dd' }}</td>
