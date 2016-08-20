@@ -66,26 +66,39 @@
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-6" ng-controller="MisExpedientesCtrl">
 		<rd-widget>
-			<rd-widget-header icon="fa-users" title="Users">
-				<input type="text" placeholder="Search" class="form-control input-sm">
+			<rd-widget-header icon="fa-calendar" title="Mis expedientes">
+				<input type="text" ng-model="misExpedientesFilter.$" placeholder="Filtrar" class="form-control input-sm">
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr><th class="text-center">ID</th><th>Usuario</th><th>Rol</th></tr>
+						<tr>
+							<td>Instancia</td>
+							<td>Año/consecutivo</td>
+							<td>Enviar notificaciones</td>
+						</tr>
 						</thead>
 						<tbody>
-							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td></tr>
-							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td></tr>
-							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td></tr>
+						<tr ng-repeat="e in misExpedientes | filter:misExpedientesFilter">
+							<td>{{e.expediente.instancia}}</td>
+							<td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
+							<td>
+								<pretty-checkbox ng-model="e.expediente.notificar" label="'Enviar por e-mail'"></pretty-checkbox>
+							</td>
+							<td>
+								<button ui-sref="busqueda.por-expediente({claveInstancia: e.expediente.instancia, agno: e.expediente['año'], consecutivo: e.expediente.consecutivo})" class="btn btn-primary" type="button">
+									<i class="fa fa-external-link"></i> Ver
+								</button>
+							</td>
+						</tr>
 						</tbody>
 					</table>
-        		</div>
+				</div>
 			</rd-widget-body>
-		<rd-widget>
-	</rd-widget></rd-widget></div>
+		</rd-widget>
+	</div>
 </div>
 </section>

@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <rd-widget>
                 <rd-widget-header icon="fa-calendar" title="Mis expedientes">
                     <input type="text" ng-model="misExpedientesFilter.$" placeholder="Filtrar" class="form-control input-sm">
@@ -36,6 +36,11 @@
                                 <td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
                                 <td>
                                     <pretty-checkbox ng-model="e.expediente.notificar" label="'Enviar por e-mail'"></pretty-checkbox>
+                                </td>
+                                <td>
+                                    <button ui-sref="busqueda.por-expediente({claveInstancia: e.expediente.instancia, agno: e.expediente['año'], consecutivo: e.expediente.consecutivo})" class="btn btn-primary" type="button">
+                                        <i class="fa fa-external-link"></i> Ver
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
