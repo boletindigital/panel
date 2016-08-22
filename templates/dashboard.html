@@ -78,16 +78,13 @@
 						<tr>
 							<td>Instancia</td>
 							<td>Año/consecutivo</td>
-							<td>Enviar notificaciones</td>
+							<td></td>
 						</tr>
 						</thead>
 						<tbody>
 						<tr ng-repeat="e in misExpedientes | filter:misExpedientesFilter">
 							<td>{{e.expediente.instancia}}</td>
 							<td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
-							<td>
-								<pretty-checkbox ng-model="e.expediente.notificar" label="'Enviar por e-mail'"></pretty-checkbox>
-							</td>
 							<td>
 								<button ui-sref="busqueda.por-expediente({claveInstancia: e.expediente.instancia, agno: e.expediente['año'], consecutivo: e.expediente.consecutivo})" class="btn btn-primary" type="button">
 									<i class="fa fa-external-link"></i> Ver
