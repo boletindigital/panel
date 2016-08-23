@@ -32,7 +32,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="e in misExpedientes | filter:misExpedientesFilter">
+                            <tr ng-repeat="e in misExpedientes | orderBy:'-expediente.ultimoAcuerdo.fecha' | filter:misExpedientesFilter">
                                 <td>{{e.expediente.instancia}}</td>
                                 <td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
                                 <td>{{e.expediente.ultimoAcuerdo.fecha | date}}</td>
