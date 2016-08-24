@@ -35,7 +35,7 @@
                             <tr ng-repeat="e in misExpedientes | orderBy:'-expediente.ultimoAcuerdo.fecha' | filter:misExpedientesFilter">
                                 <td>{{e.expediente.instancia}}</td>
                                 <td ng-init="e.expediente.expediente = '' + e.expediente['año'] + '/' + e.expediente.consecutivo">{{e.expediente.expediente}}</td>
-                                <td>{{e.expediente.ultimoAcuerdo.fecha | date}}</td>
+                                <td>{{e.expediente.ultimoAcuerdo.fecha.substring(0,10) | date}}</td>
                                 <td>
                                     <button ui-sref="busqueda.por-expediente({claveInstancia: e.expediente.instancia, agno: e.expediente['año'], consecutivo: e.expediente.consecutivo})" class="btn btn-primary" type="button">
                                         <i class="fa fa-external-link"></i> Ver

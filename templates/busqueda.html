@@ -103,7 +103,7 @@
 		<tr dir-paginate="acuerdo in acuerdos | filter:filter | orderBy: '-fecha' | itemsPerPage: pagination.objectsPerPage" total-items="pagination.totalObjects" current-page="pagination.current">
 			<td>{{acuerdo.claveInstancia}}</td>
 			<td>{{acuerdo['año']}}<b>/</b>{{acuerdo.consecutivo}}</td>
-			<td>{{acuerdo.fecha | date : 'yyyy/MM/dd' }}</td>
+			<td>{{acuerdo.fecha.substring(0,10) | date : 'yyyy/MM/dd' }}</td>
 			<td>{{acuerdo.secretaria}}</td>
 			<td>{{acuerdo.actor}}</td>
 			<td>{{acuerdo.demandado}}</td>
